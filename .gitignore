@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+
+.DS_Store
+Thumbs.db
+
+crawl_env/
+.env/
+
+pip-log.txt
+pip-delete-this-directory.txt
+
+Pipfile.lock
