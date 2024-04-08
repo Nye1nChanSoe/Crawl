@@ -7,6 +7,7 @@ class DatabaseConnection:
         self.user = user
         self.password = password
         self.database = database
+        self.connect()
 
     def connect(self):
         try:
@@ -16,7 +17,7 @@ class DatabaseConnection:
                 password=self.password,
                 database=self.database
             )
-            print("Connected to {database} successfully".format(database = self.database))
+            print(f"Connected to {self.database} successfully")
         except Error as e:
             # If database does not exist, create it
             if e.errno == mysql.connector.errorcode.ER_BAD_DB_ERROR:
