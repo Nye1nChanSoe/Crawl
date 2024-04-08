@@ -8,6 +8,8 @@ if __name__ == "__main__":
     table_builder.id()
     table_builder.column("name").varchar()
     table_builder.column("email").varchar().unique()
+    table_builder.column("created_at").datetime()
+    table_builder.column("updated_at").datetime(True)
     table_builder.create()
 
     query_builder = QueryBuilder(connection)

@@ -71,6 +71,19 @@ class TableBuilder:
             raise ValueError("No column to apply uniqueness constraint. Please add a column first.")
         return self
 
+    def datetime(self, include_on_update=False):
+        if self._last_column_name:
+            for col in self._columns:
+                if col['name'] == self._last_column_name:
+                    if include_on_update:
+                        col['type'] = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+                    else:
+                        col['type'] = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+                    break
+        else:
+            raise ValueError("No column to apply CURRENT_TIMESTAMP constraint. Please add a column first.")
+        return self
+
     def create(self):
         cursor = self._conn.connection.cursor()
 
