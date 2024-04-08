@@ -53,6 +53,10 @@ class TableBuilder:
         self._current_column["type"] = "INT"
         return self
 
+    def text(self):
+        self._current_column["type"] = "TEXT"
+        return self
+
     def decimal(self, precision=10, scale=2):
         self._current_column["type"] = f"DECIMAL({precision}, {scale})"
         return self
@@ -69,6 +73,16 @@ class TableBuilder:
                     break
         else:
             raise ValueError("No column to apply uniqueness constraint. Please add a column first.")
+        return self
+
+    def date(self):
+        if self._last_column_name:
+            for col in self._columns:
+                if col['name'] == self._last_column_name:
+                    col['type'] = "DATE"
+                    break
+        else:
+            raise ValueError("No column to apply DATE type. Please add a column first.")
         return self
 
     def datetime(self, include_on_update=False):
